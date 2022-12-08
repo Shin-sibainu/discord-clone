@@ -1,0 +1,15 @@
+.sidebarChannel {
+  h4 {
+    color: #7b7c85;
+    display: flex;
+    padding: 5px;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+      color: white;
+      background-color: #423f71;
+      border-radius: 12px;
+    }
+  }
+}
