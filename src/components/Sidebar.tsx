@@ -5,6 +5,8 @@ import {
   Settings,
 } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
+import MicIcon from "@mui/icons-material/Mic";
+import HeadphonesIcon from "@mui/icons-material/Headphones";
 import React from "react";
 import "./Sidebar.scss";
 import SidebarChannle from "./SidebarChannle";
@@ -46,7 +48,7 @@ const Sidebar = () => {
 
           <div className="sidebarSettings">
             <div className="sidebarAccount">
-              <img src="" alt="account" />
+              <img src="./icon.png" alt="account" />
               <div className="accountName">
                 <h4>ShinCode</h4>
                 <span>#8162</span>
@@ -54,8 +56,8 @@ const Sidebar = () => {
             </div>
 
             <div className="sidebarVoice">
-              <MicExternalOff />
-              <PhoneAndroid />
+              <MicIcon />
+              <HeadphonesIcon />
               <Settings />
             </div>
           </div>
