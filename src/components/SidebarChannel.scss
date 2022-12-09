@@ -1,4 +1,5 @@
 .sidebarChannel {
+  padding-left: 20px;
   h4 {
     color: #7b7c85;
     display: flex;
@@ -11,5 +12,10 @@
       background-color: #423f71;
       border-radius: 12px;
     }
+  }
+
+  .sidebarChannelHash {
+    font-size: 22px;
+    padding-right: 10px;
   }
 }

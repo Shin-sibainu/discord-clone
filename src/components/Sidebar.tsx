@@ -1,4 +1,9 @@
-import { ExpandMoreOutlined } from "@mui/icons-material";
+import {
+  ExpandMoreOutlined,
+  MicExternalOff,
+  PhoneAndroid,
+  Settings,
+} from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
 import React from "react";
 import "./Sidebar.scss";
@@ -37,6 +42,22 @@ const Sidebar = () => {
             <SidebarChannle id="1" channel="sample" />
             <SidebarChannle id="1" channel="sample" />
             <SidebarChannle id="1" channel="sample" />
+          </div>
+
+          <div className="sidebarSettings">
+            <div className="sidebarAccount">
+              <img src="" alt="account" />
+              <div className="accountName">
+                <h4>ShinCode</h4>
+                <span>#8162</span>
+              </div>
+            </div>
+
+            <div className="sidebarVoice">
+              <MicExternalOff />
+              <PhoneAndroid />
+              <Settings />
+            </div>
           </div>
         </div>
       </div>
