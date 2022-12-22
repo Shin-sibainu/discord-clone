@@ -17,7 +17,7 @@ const Sidebar = () => {
       <div className="sidebarLeft">
         {/* discrodIcon */}
         <div className="serverIcon">
-          <img src="./logo192.png" alt="" />
+          <img src="./discordLogo.png" alt="" />
         </div>
         <div className="serverIcon">
           <img src="./logo192.png" alt="" />
