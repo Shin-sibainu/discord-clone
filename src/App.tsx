@@ -1,12 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.scss";
-import { useSelector } from "./app/store";
+import { useAppSelector, useAppDispatch } from "./app/hooks";
 import Chat from "./components/Chat";
 import Login from "./components/Login";
 import Sidebar from "./components/Sidebar";
+import { login, logout } from "./features/userSlice";
+import { auth } from "./firebase";
 
 function App() {
-  const user = useSelector((state) => state.user.user);
+  const user = useAppSelector((state) => state.user.user);
+  console.log(user);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      console.log(authUser); //ここはある。
+      if (authUser) {
+        dispatch(
+          login({
+            uid: authUser.uid,
+            photo: authUser.photoURL,
+            email: authUser.email,
+            displayName: authUser.displayName,
+          })
+        );
+      } else {
+        dispatch(logout());
+      }
+    });
+  }, [dispatch]);
+
   return (
     <div className="App">
       {user ? (

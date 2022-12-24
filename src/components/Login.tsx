@@ -16,7 +16,7 @@ const Login = () => {
       {/* <h2>ログインページです。</h2> */}
 
       <div className="loginLogo">
-        <img src="./discordLogo.jpg" alt="" />
+        <img src="./discordLogo.png" alt="" />
       </div>
 
       <Button onClick={signIn}>ログイン</Button>
