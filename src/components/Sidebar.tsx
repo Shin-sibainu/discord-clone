@@ -7,16 +7,50 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import MicIcon from "@mui/icons-material/Mic";
 import HeadphonesIcon from "@mui/icons-material/Headphones";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Sidebar.scss";
 import SidebarChannle from "./SidebarChannle";
 import { useAppSelector } from "../app/hooks";
-import { auth } from "../firebase";
-// import User from "../Types";
+import db, { auth } from "../firebase";
+import {
+  collection,
+  DocumentData,
+  getDocs,
+  query,
+} from "firebase/firestore/lite";
+
+interface Channel {
+  id: string;
+  channel: DocumentData;
+}
 
 const Sidebar = () => {
   const user = useAppSelector((state) => state.user.user);
-  console.log(user); //undefined
+  const [channels, setChannels] = useState<Channel[]>([]);
+
+  useEffect(() => {
+    const getDocuments = async () => {
+      const q = query(collection(db, "channels"));
+      const querySnapshot = await getDocs(q).then((snapshot) =>
+        setChannels(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            channel: doc.data(),
+          }))
+        )
+      );
+
+      // setChannels(
+      //   querySnapshot.forEach((doc) => ({
+      //     id: doc.id,
+      //     channel: doc.data(),
+      //   }))
+      // );
+    };
+    getDocuments();
+  }, []);
+
+  // console.log(user); //undefined
   return (
     <div className="sidebar">
       <div className="sidebarLeft">
@@ -45,10 +79,16 @@ const Sidebar = () => {
           </div>
 
           <div className="sidebarChannelList">
+            {channels.map((channel) => (
+              <SidebarChannle
+                id={channel.id}
+                channel={channel}
+                key={channel.id}
+              />
+            ))}
+            {/* <SidebarChannle id="1" channel="sample" />
             <SidebarChannle id="1" channel="sample" />
-            <SidebarChannle id="1" channel="sample" />
-            <SidebarChannle id="1" channel="sample" />
-            <SidebarChannle id="1" channel="sample" />
+            <SidebarChannle id="1" channel="sample" /> */}
           </div>
 
           <div className="sidebarSettings">
