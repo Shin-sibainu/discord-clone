@@ -1,9 +1,4 @@
-import {
-  ExpandMoreOutlined,
-  MicExternalOff,
-  PhoneAndroid,
-  Settings,
-} from "@mui/icons-material";
+import { ExpandMoreOutlined, Settings } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
 import MicIcon from "@mui/icons-material/Mic";
 import HeadphonesIcon from "@mui/icons-material/Headphones";
@@ -17,6 +12,7 @@ import {
   DocumentData,
   getDocs,
   query,
+  QueryDocumentSnapshot,
 } from "firebase/firestore/lite";
 
 interface Channel {
@@ -33,19 +29,12 @@ const Sidebar = () => {
       const q = query(collection(db, "channels"));
       const querySnapshot = await getDocs(q).then((snapshot) =>
         setChannels(
-          snapshot.docs.map((doc) => ({
+          snapshot.docs.map((doc: QueryDocumentSnapshot<DocumentData>) => ({
             id: doc.id,
             channel: doc.data(),
           }))
         )
       );
-
-      // setChannels(
-      //   querySnapshot.forEach((doc) => ({
-      //     id: doc.id,
-      //     channel: doc.data(),
-      //   }))
-      // );
     };
     getDocuments();
   }, []);
