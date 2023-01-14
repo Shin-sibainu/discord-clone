@@ -7,13 +7,7 @@ export interface InitialState {
   };
 }
 
-// export interface User {
-//   user:
-//     | undefined
-//     | {
-//         uid: string;
-//         photo: string;
-//         email: string;
-//         displayName: string;
-//       };
-// }
+export interface InitialAppState {
+  channelId: string | null;
+  channelName: string | null;
+}

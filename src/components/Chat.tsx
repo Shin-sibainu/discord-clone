@@ -8,11 +8,16 @@ import {
 } from "@mui/icons-material";
 import GifIcon from "@mui/icons-material/Gif";
 import Message from "./Message";
+import { useAppSelector } from "../app/hooks";
 
 const Chat = () => {
+  const user = useAppSelector((state) => state.user.user);
+  const channelId = useAppSelector((state) => state.app.channelId);
+  const channelName = useAppSelector((state) => state.app.channelName);
+
   return (
     <div className="chat">
-      <ChatHeader />
+      <ChatHeader channelName={channelName} />
 
       <div className="chatMessages">
         <Message />

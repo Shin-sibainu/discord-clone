@@ -8,12 +8,15 @@ import SidebarChannle from "./SidebarChannle";
 import { useAppSelector } from "../app/hooks";
 import db, { auth } from "../firebase";
 import {
-  collection,
+  addDoc,
+  // collection,
   DocumentData,
+  DocumentReference,
   getDocs,
-  query,
+  // query,
   QueryDocumentSnapshot,
 } from "firebase/firestore/lite";
+import { onSnapshot, orderBy, query, collection } from "firebase/firestore";
 
 interface Channel {
   id: string;
@@ -25,21 +28,33 @@ const Sidebar = () => {
   const [channels, setChannels] = useState<Channel[]>([]);
 
   useEffect(() => {
-    const getDocuments = async () => {
-      const q = query(collection(db, "channels"));
-      const querySnapshot = await getDocs(q).then((snapshot) =>
-        setChannels(
-          snapshot.docs.map((doc: QueryDocumentSnapshot<DocumentData>) => ({
-            id: doc.id,
-            channel: doc.data(),
-          }))
-        )
-      );
-    };
-    getDocuments();
+    const channleRef = collection(db, "channels");
+    // const q = query(channleRef, orderBy("timestamp", "desc"));
+    // const unsub = onSnapshot(q, (querySnapshot) => {
+    //   setChannels(
+    //     querySnapshot.docs.map((doc: QueryDocumentSnapshot<DocumentData>) => ({
+    //       id: doc.id,
+    //       channel: doc.data(),
+    //     }))
+    //   );
+    // });
+    // return unsub;
   }, []);
 
-  // console.log(user); //undefined
+  const addChannel = async () => {
+    let channelName = prompt("新しいチャンネルを作成します");
+
+    if (channelName) {
+      const docRef: DocumentReference<DocumentData> = await addDoc(
+        collection(db, "channels"),
+        {
+          channelName: channelName,
+        }
+      );
+      // console.log(docRef);
+    }
+  };
+
   return (
     <div className="sidebar">
       <div className="sidebarLeft">
@@ -64,7 +79,7 @@ const Sidebar = () => {
               <ExpandMoreOutlined />
               <h4>プログラミングチャンネル</h4>
             </div>
-            <AddIcon className="sidebarAddChannel" />
+            <AddIcon className="sidebarAddChannel" onClick={addChannel} />
           </div>
 
           <div className="sidebarChannelList">
