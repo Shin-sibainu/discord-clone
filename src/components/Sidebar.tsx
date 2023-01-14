@@ -6,40 +6,21 @@ import React, { useEffect, useState } from "react";
 import "./Sidebar.scss";
 import SidebarChannle from "./SidebarChannle";
 import { useAppSelector } from "../app/hooks";
-import db, { auth } from "../firebase";
+import { db, auth } from "../firebase";
 import {
+  collection,
   addDoc,
-  // collection,
   DocumentData,
   DocumentReference,
-  getDocs,
-  // query,
-  QueryDocumentSnapshot,
-} from "firebase/firestore/lite";
-import { onSnapshot, orderBy, query, collection } from "firebase/firestore";
-
-interface Channel {
-  id: string;
-  channel: DocumentData;
-}
+} from "firebase/firestore";
+import useFirebase from "../hooks/useFirebase";
 
 const Sidebar = () => {
   const user = useAppSelector((state) => state.user.user);
-  const [channels, setChannels] = useState<Channel[]>([]);
+  // const [channels, setChannels] = useState<Channel[]>([]);
 
-  useEffect(() => {
-    const channleRef = collection(db, "channels");
-    // const q = query(channleRef, orderBy("timestamp", "desc"));
-    // const unsub = onSnapshot(q, (querySnapshot) => {
-    //   setChannels(
-    //     querySnapshot.docs.map((doc: QueryDocumentSnapshot<DocumentData>) => ({
-    //       id: doc.id,
-    //       channel: doc.data(),
-    //     }))
-    //   );
-    // });
-    // return unsub;
-  }, []);
+  const { documents: channels } = useFirebase("channels");
+  console.log(channels);
 
   const addChannel = async () => {
     let channelName = prompt("新しいチャンネルを作成します");

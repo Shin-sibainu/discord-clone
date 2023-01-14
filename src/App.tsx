@@ -38,11 +38,11 @@ function App() {
       {user ? (
         <>
           {/* sidebar */}
-          {/* <ErrorBoundary FallbackComponent={ErrorFallback}> */}
-          <Suspense fallback={<div>...Loading</div>}>
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            {/* <Suspense fallback={<div>...Loading</div>}> */}
             <Sidebar />
-          </Suspense>
-          {/* </ErrorBoundary> */}
+            {/* </Suspense> */}
+          </ErrorBoundary>
           {/* home */}
           <Chat />
         </>
