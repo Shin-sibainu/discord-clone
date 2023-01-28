@@ -3,6 +3,8 @@ import { InitialState } from "../Types";
 
 const initialState: InitialState = {
   user: null,
+  displayName: "",
+  photo: undefined,
 };
 
 export const userSlice = createSlice({

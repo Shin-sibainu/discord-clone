@@ -1,4 +1,6 @@
 export interface InitialState {
+  displayName: string;
+  photo: string | undefined;
   user: null | {
     uid: string;
     photo: string;
