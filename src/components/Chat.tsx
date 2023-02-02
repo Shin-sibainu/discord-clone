@@ -40,6 +40,10 @@ interface Messages {
   };
 }
 
+//51:ディスコードチャット欄にメッセージを表示してみよう
+//52:メッセージを投稿した順番にソートして表示してみよう
+//54:【補足】サブコレクションデータ取得をカスタムフックスで切り出してみよう
+
 const Chat = () => {
   const user = useAppSelector((state) => state.user.user);
   const channelId = useAppSelector((state) => state.app.channelId);
